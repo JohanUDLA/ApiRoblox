@@ -35,13 +35,15 @@ namespace ApiRoblox.Controllers
         // PUT: api/jugadores/5
         public IHttpActionResult Put(int id, Jugador est)
         {
+            if (est == null) return BadRequest("Jugador data is required");
+
             var e = db.Jugadores.Find(id);
             if (e == null) return NotFound();
-            e.Nombre = est.Nombre; e.Edad = est.Edad;
+            e.Nombre = est.Nombre;
+            e.Edad = est.Edad;
             db.SaveChanges();
             return Ok(e);
         }
-
         // DELETE: api/jugadores/5
         public IHttpActionResult Delete(int id)
         {
